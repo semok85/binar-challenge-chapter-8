@@ -1,6 +1,7 @@
 const playerRouter = require("./player.routes");
 const v1 = require("express").Router();
 
+v1.use("/docs", require("./swagger-ui"));
 v1.get("/", (_, res) => {
   res.send("from v1");
 });
