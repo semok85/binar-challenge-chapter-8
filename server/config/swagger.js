@@ -1,4 +1,5 @@
 const swaggerJsdoc = require("swagger-jsdoc");
+const authorizationSchema = require("./schemas/authorization.schema");
 const experienceSchema = require("./schemas/experience.schema");
 const playerSchema = require("./schemas/player.schema");
 
@@ -16,12 +17,17 @@ const options = {
     servers: [{ url: "http://localhost:4000/api/v1" }],
     tags: [
       {
+        name: "Authorization",
+        description: "Authorization/login endpoint",
+      },
+      {
         name: "Player",
         description: "Operations about player",
       },
     ],
     components: {
       schemas: {
+        Authorization: authorizationSchema,
         Players: playerSchema,
         Experience: experienceSchema,
       },
@@ -36,7 +42,7 @@ const options = {
       },
     },
   },
-  apis: ["./server/routes/v1/*.js"], // lokasi endpoint Anda
+  apis: ["./server/routes/v1/*.js"], // your endpoint location
 };
 
 const specs = swaggerJsdoc(options);
