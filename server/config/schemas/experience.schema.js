@@ -1,7 +1,7 @@
 module.exports = {
   type: "object",
   properties: {
-    experience: {
+    exp: {
       type: "integer",
       description: "experience value",
       required: true,

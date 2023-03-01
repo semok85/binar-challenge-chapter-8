@@ -17,8 +17,8 @@ const options = {
     servers: [{ url: "http://localhost:4000/api/v1" }],
     tags: [
       {
-        name: "Authorization",
-        description: "Authorization/login endpoint",
+        name: "Auth",
+        description: "Auth endpoint",
       },
       {
         name: "Player",

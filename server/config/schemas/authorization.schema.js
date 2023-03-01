@@ -5,12 +5,13 @@ module.exports = {
       type: "string",
       description: "this is username of user",
       required: true,
-      example: "semoktavianus",
+      example: "PussySlayer613",
     },
     password: {
       type: "string",
       description: "user's password",
       required: true,
+      example: "youknownothing",
     },
   },
 };

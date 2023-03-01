@@ -1,5 +1,6 @@
 const PlayerController = require("../../controllers/player.controller");
 const playerRouter = require("express").Router();
+const authMiddleware = require("../../middlewares/authorization");
 
 /**
  * @swagger
@@ -9,7 +10,7 @@ const playerRouter = require("express").Router();
  *          - Player
  *      title: Users
  *      summary: Dislplay list all players
- *      description: Display list all players
+ *      description: Display list of all players
  *      responses :
  *          200:
  *              description: Success
@@ -18,7 +19,7 @@ const playerRouter = require("express").Router();
  *      security:
  *      - bearerAuth: []
  */
-playerRouter.get("/", PlayerController.getPlayers);
+playerRouter.get("/", authMiddleware, PlayerController.getPlayers);
 
 /**
  * @swagger
@@ -68,7 +69,7 @@ playerRouter.post("/", PlayerController.createPlayer);
  *      security:
  *      - bearerAuth: []
  */
-playerRouter.get("/:id", PlayerController.getPlayerById);
+playerRouter.get("/:id", authMiddleware, PlayerController.getPlayerById);
 
 /**
  * @swagger
@@ -77,8 +78,8 @@ playerRouter.get("/:id", PlayerController.getPlayerById);
  *      tags:
  *          - Player
  *      title: Player
- *      summary: Update player by player id
- *      description: Update player by player id
+ *      summary: Update player by player id, Authorized player only
+ *      description: Update player by player id, Authorized player only
  *      operationId: updatePlayer
  *      parameters:
  *          - name: id
@@ -101,7 +102,7 @@ playerRouter.get("/:id", PlayerController.getPlayerById);
  *      security:
  *      - bearerAuth: []
  */
-playerRouter.put("/:id", PlayerController.updatePlayer);
+playerRouter.put("/:id", authMiddleware, PlayerController.updatePlayer);
 
 /**
  * @swagger
@@ -110,8 +111,8 @@ playerRouter.put("/:id", PlayerController.updatePlayer);
  *      tags:
  *          - Player
  *      title: Player
- *      summary: Delete player by player id
- *      description: Delete player by player id
+ *      summary: Delete player by player id, Authorized player only
+ *      description: Delete player by player id, Authorized player only
  *      operationId: deletePlayer
  *      parameters:
  *          - name: id
@@ -128,7 +129,7 @@ playerRouter.put("/:id", PlayerController.updatePlayer);
  *      security:
  *      - bearerAuth: []
  */
-playerRouter.delete("/:id", PlayerController.deletePlayer);
+playerRouter.delete("/:id", authMiddleware, PlayerController.deletePlayer);
 
 /**
  * @swagger

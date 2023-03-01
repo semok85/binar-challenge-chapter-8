@@ -6,7 +6,7 @@ const { playerLogin } = require("../../controllers/auth.controller");
  * /login:
  *   post:
  *     tags:
- *       - Authorization
+ *       - Auth
  *     title: Player login
  *     summary: Endpoint of player login
  *     description: player login and generate token to authorization

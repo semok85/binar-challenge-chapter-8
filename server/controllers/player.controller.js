@@ -94,28 +94,36 @@ class PlayerController {
 
   static async updatePlayer(req, res, next) {
     try {
-      const { id } = req.params;
-      const player = await Player.findByPk(id);
-      if (!player)
-        return res
-          .status(404)
-          .json({
+      const { username, email, password } = req.body;
+      const id = req.params.id;
+      //authorization with req.UserId that generated from token
+      if (id == req.userId) {
+        const player = await Player.findByPk(id);
+        if (!player)
+          return res.status(404).json({
             result: "Not found",
             message: `Player with ${id} not found`,
           });
-      const updatedPlayer = await Player.update(req.body, {
-        where: { id: id },
-      });
-      if (updatedPlayer == 1) {
-        return res.status(200).json({
-          result: "Success",
-          message: `Player with id: ${id} successfully updated`,
-        });
+        const updatedPlayer = await Player.update(
+          {
+            username: username || player.username,
+            email: email || player.email,
+            password: password ? await hashPassword(password) : player.password,
+          },
+          {
+            where: { id: id },
+          }
+        );
+        if (updatedPlayer == 1) {
+          return res.status(200).json({
+            result: "Success",
+            message: `Player with id: ${id} successfully updated`,
+          });
+        }
       } else {
-        return res.status(500).json({
-          result: "failed",
-          message: "Failed to update",
-        });
+        return res
+          .status(403)
+          .json({ result: "Failed", message: "You are not authorized" });
       }
     } catch (error) {
       next(error);
@@ -135,12 +143,10 @@ class PlayerController {
 
       const player = await Player.findByPk(id);
       if (!player)
-        return res
-          .status(404)
-          .json({
-            result: "Not found",
-            message: `Player with ${id} not found`,
-          });
+        return res.status(404).json({
+          result: "Not found",
+          message: `Player with ${id} not found`,
+        });
 
       if (player) {
         let expValue = player.experience + parseInt(exp);
@@ -176,19 +182,25 @@ class PlayerController {
   static async deletePlayer(req, res, next) {
     try {
       const { id } = req.params;
-
-      const destroyed = await Player.destroy({
-        where: { id: id },
-      });
-      if (destroyed == 1) {
-        res.status(200).json({
-          result: "Success",
-          message: `Player with id: ${id}, was deleted successfully`,
+      if (id == req.userId) {
+        const destroyed = await Player.destroy({
+          where: { id: id },
         });
+        if (destroyed == 1) {
+          res.status(200).json({
+            result: "Success",
+            message: `Player with id: ${id}, was deleted successfully`,
+          });
+        } else {
+          res.status(400).json({
+            result: "FAILED",
+            message: `Cannot delete Player with id=${id}. Maybe Player was not found!`,
+          });
+        }
       } else {
-        res.status(400).json({
-          result: "FAILED",
-          message: `Cannot delete Player with id=${id}. Maybe Player was not found!`,
+        return res.status(403).json({
+          result: "Failed",
+          message: "You are not authorized to delete this player",
         });
       }
     } catch (error) {
