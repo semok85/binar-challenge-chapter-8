@@ -1,0 +1,38 @@
+<div class="row my-4">
+  <div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
+    <div class="card">
+      <h5 class="card-header">Total Players</h5>
+      <div class="card-body">
+        <h1 class="card-title"><%= players.length %></h1>
+        <p class="card-text">Players</p>
+        <p class="card-text text-success">
+          <%= percentagePlayerGain %> % increase since last month
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-4">
+    <div class="card">
+      <h5 class="card-header">Top Experience Player</h5>
+      <div class="card-body">
+        <h1 class="card-title"><%= topExperiencePlayer.experience %></h1>
+        <p class="card-text"><%= topExperiencePlayer.username %></p>
+        <p class="card-text text-success">
+          Join since <%= topExperiencePlayer.createdAt.toLocaleDateString() %>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-4">
+    <div class="card">
+      <h5 class="card-header">Top Level Player</h5>
+      <div class="card-body">
+        <h1 class="card-title"><%= topLevelPlayer.lvl %></h1>
+        <p class="card-text"><%= topLevelPlayer.username %></p>
+        <p class="card-text text-success">
+          Join since <%= topExperiencePlayer.createdAt.toLocaleDateString() %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

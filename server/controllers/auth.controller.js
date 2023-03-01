@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const { Player } = require("../models");
 require("dotenv").config();
-const bcrypt = require("bcrypt");
+const { verifyPassword } = require("../utils/passwordHandler");
 
 // Function to handle user login
 const playerLogin = async (req, res) => {
@@ -17,7 +17,7 @@ const playerLogin = async (req, res) => {
     }
 
     // Check if password is correct
-    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    const isPasswordCorrect = verifyPassword(password, user.password);
     if (!isPasswordCorrect) {
       return res
         .status(401)

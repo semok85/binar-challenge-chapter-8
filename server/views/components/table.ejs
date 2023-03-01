@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-12 mb-4 mb-lg-0">
+    <div class="card">
+      <h5 class="card-header">Players Data Table</h5>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Experience</th>
+                <th scope="col">Level</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% players.forEach(function(player){ %>
+              <tr>
+                <th scope="row"><%= player.id %></th>
+                <td><%= player.username %></td>
+                <td><%= player.email %></td>
+                <td><%= player.experience %></td>
+                <td><%= player.lvl %></td>
+                <td>
+                  <a href="#" class="btn btn-sm btn-primary">Delete</a>
+                </td>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+        <a href="#" class="btn btn-block btn-light">View all</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-xl-4">
+    <!-- Another widget will go here -->
+  </div>
+</div>

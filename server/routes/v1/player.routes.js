@@ -9,7 +9,7 @@ const authMiddleware = require("../../middlewares/authorization");
  *      tags:
  *          - Player
  *      title: Users
- *      summary: Dislplay list all players
+ *      summary: Dislplay list of all players
  *      description: Display list of all players
  *      responses :
  *          200:
