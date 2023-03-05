@@ -24,9 +24,103 @@
                 <td><%= player.experience %></td>
                 <td><%= player.lvl %></td>
                 <td>
-                  <a href="#" class="btn btn-sm btn-primary">Delete</a>
+                  <a
+                    href="/dashboard/delete/players/<%= player.id %>"
+                    class="btn btn-sm btn-primary"
+                    >Delete</a
+                  >
+                  <button
+                    type="button"
+                    class="btn btn-primary btn-sm"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    Edit Player
+                  </button>
+                  <!-- Modal -->
+
+                  <div
+                    class="modal fade"
+                    id="exampleModal"
+                    tabindex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                  >
+                    <form
+                      action="/dashboard/edit/players/<%= player.id %>"
+                      method="post"
+                    >
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                              Edit User
+                            </h5>
+                            <button
+                              type="button"
+                              class="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            ></button>
+                          </div>
+                          <div class="modal-body">
+                            <!-- Email input -->
+                            <div class="form-outline mb-4">
+                              <input
+                                type="text"
+                                id="loginName"
+                                class="form-control"
+                                placeholder="Username"
+                                name="username"
+                                value="<%= player.username %>"
+                              />
+                            </div>
+
+                            <!-- Password input -->
+                            <div class="form-outline mb-4">
+                              <input
+                                type="password"
+                                id="loginPassword"
+                                class="form-control"
+                                placeholder="Password"
+                                name="password"
+                              />
+                            </div>
+
+                            <!-- email input -->
+                            <div class="form-outline mb-4">
+                              <input
+                                type="email"
+                                id="email"
+                                class="form-control"
+                                placeholder="Email"
+                                name="email"
+                                value="<%= player.email %>"
+                              />
+                            </div>
+
+                            <!-- Submit button -->
+                            <div class="d-grid col-12 mx-auto"></div>
+                          </div>
+                          <div class="modal-footer">
+                            <button
+                              type="button"
+                              class="btn btn-secondary"
+                              data-bs-dismiss="modal"
+                            >
+                              Close
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                              Edit
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
                 </td>
               </tr>
+
               <% }); %>
             </tbody>
           </table>

@@ -1,6 +1,11 @@
 const homeRouter = require("express").Router();
-const homeController = require("../controllers/home.controller");
-
-homeRouter.get("/", homeController);
+const {
+  home,
+  registerAdmin,
+  loginAdmin,
+} = require("../controllers/home.controller");
+homeRouter.get("/", home);
+homeRouter.post("/register", registerAdmin);
+homeRouter.post("/login", loginAdmin);
 
 module.exports = homeRouter;
