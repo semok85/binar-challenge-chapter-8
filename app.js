@@ -14,7 +14,11 @@ const session = require("express-session");
 const PORT = process.env.PORT || 4000;
 
 // middlewares
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());

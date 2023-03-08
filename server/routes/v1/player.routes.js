@@ -73,6 +73,37 @@ playerRouter.get("/:id", authMiddleware, PlayerController.getPlayerById);
 
 /**
  * @swagger
+ * /players/username/{username}:
+ *  get:
+ *      tags:
+ *          - Player
+ *      title: Player
+ *      summary: Get player by username
+ *      description: Get player by username
+ *      operationId: getPlayerByUsername
+ *      parameters:
+ *          - name: username
+ *            in: path
+ *            description: 'The id that needs to be fetch'
+ *            required: true
+ *            schema:
+ *              type: string
+ *      responses :
+ *          200:
+ *              description: Success
+ *          404:
+ *              description: Not Found
+ *      security:
+ *      - bearerAuth: []
+ */
+playerRouter.get(
+  "/username/:username",
+  authMiddleware,
+  PlayerController.getPlayerByUsername
+);
+
+/**
+ * @swagger
  * /players/{id}:
  *  put:
  *      tags:
@@ -93,7 +124,7 @@ playerRouter.get("/:id", authMiddleware, PlayerController.getPlayerById);
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Players'
+ *                $ref: '#/components/schemas/Updateplayer'
  *      responses :
  *          200:
  *              description: Success

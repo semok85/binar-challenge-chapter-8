@@ -92,10 +92,35 @@ class PlayerController {
     }
   }
 
+  static async getPlayerByUsername(req, res, next) {
+    try {
+      const { username } = req.params;
+      const player = await Player.findOne({
+        where: {
+          username: username,
+        },
+      });
+      if (player) {
+        return res.status(200).json({
+          result: "Success",
+          data: player,
+        });
+      } else {
+        return res.status(404).json({
+          result: "Not found",
+          message: `Player with username ${username} not found`,
+        });
+      }
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async updatePlayer(req, res, next) {
     try {
-      const { username, email, password } = req.body;
+      const { email, password } = req.body;
       const id = req.params.id;
+
       //authorization with req.UserId that generated from token
       if (id == req.userId) {
         const player = await Player.findByPk(id);
@@ -106,7 +131,6 @@ class PlayerController {
           });
         const updatedPlayer = await Player.update(
           {
-            username: username || player.username,
             email: email || player.email,
             password: password ? await hashPassword(password) : player.password,
           },
@@ -121,9 +145,10 @@ class PlayerController {
           });
         }
       } else {
-        return res
-          .status(403)
-          .json({ result: "Failed", message: "You are not authorized" });
+        return res.status(403).json({
+          result: "Failed",
+          message: "You are not authorized",
+        });
       }
     } catch (error) {
       next(error);

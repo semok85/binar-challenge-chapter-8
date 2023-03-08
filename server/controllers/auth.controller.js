@@ -9,7 +9,11 @@ const playerLogin = async (req, res) => {
 
   try {
     // Check if user exists in the database
-    const user = await Player.findOne({ username });
+    const user = await Player.findOne({
+      where: {
+        username: username,
+      },
+    });
     if (!user) {
       return res
         .status(401)
@@ -28,6 +32,7 @@ const playerLogin = async (req, res) => {
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
       expiresIn: "1d",
     });
+    console.log(user.id + "---------");
     return res.status(200).json({ token: token });
   } catch (error) {
     console.log(error);

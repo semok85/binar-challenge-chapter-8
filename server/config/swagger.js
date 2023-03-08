@@ -2,6 +2,7 @@ const swaggerJsdoc = require("swagger-jsdoc");
 const authorizationSchema = require("./schemas/authorization.schema");
 const experienceSchema = require("./schemas/experience.schema");
 const playerSchema = require("./schemas/player.schema");
+const updateplayerSchema = require("./schemas/updateplayer.schema");
 
 const options = {
   swaggerDefinition: {
@@ -30,6 +31,7 @@ const options = {
         Authorization: authorizationSchema,
         Players: playerSchema,
         Experience: experienceSchema,
+        Updateplayer: updateplayerSchema,
       },
       securitySchemes: {
         bearerAuth: {

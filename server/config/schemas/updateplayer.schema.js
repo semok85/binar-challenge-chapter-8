@@ -1,17 +1,16 @@
 module.exports = {
   type: "object",
   properties: {
-    username: {
+    email: {
       type: "string",
-      description: "this is username of user",
+      description: "user's email",
       required: true,
-      example: "PussyPlayer613",
+      example: "semoktavianus@mail.com",
     },
     password: {
       type: "string",
       description: "user's password",
       required: true,
-      example: "123456",
     },
   },
 };

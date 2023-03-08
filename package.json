@@ -4,7 +4,12 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "install:server": "npm install",
+    "install:client": "npm install --prefix client",
+    "install": "npm run install:server && npm run install:client",
+    "start:server": "nodemon app.js",
+    "start:client": "npm start --prefix client",
+    "start:all": "npm run start:server & npm run start:client"
   },
   "repository": {
     "type": "git",
